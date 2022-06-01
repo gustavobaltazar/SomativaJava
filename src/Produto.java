@@ -1,4 +1,4 @@
-import java.util.List;
+import java.util.ArrayList;
 
 public class Produto {
     private String nome;
@@ -24,11 +24,19 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
-//    public adicionarProduto(String nome, int quantidade) {
-//
-//    }
-//    public mostrarProduto(String nome, int quantidade) {
-//
-//    }
+    public ArrayList<String> adicionarProduto(String nome, int quantidade) {
 
+        return null;
+    }
+    public ArrayList<String> alterarProduto(String nome, int quantidade) {
+        return null;
+    }
+
+    public void listarProduto(String noem, int quantidade) {
+
+    }
+
+    private ArrayList<String> removerProduto(String nome, int quantidade) {
+        return null;
+    }
 }
