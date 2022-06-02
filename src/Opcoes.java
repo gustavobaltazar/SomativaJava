@@ -1,6 +1,6 @@
 public enum Opcoes {
-    Nao(0),
-    Sim(1);
+    Nao(1),
+    Sim(0);
 
     private int inteiro;
 
