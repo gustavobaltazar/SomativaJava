@@ -23,8 +23,8 @@ public class Usuario {
     public void verificaUsuario() throws IOException {
         ArrayList<String> ler = EscreverTxt.lerTxt("users");
         int z = 0;
-        boolean verifUser = true;
-        boolean verifSenha = true;
+        boolean verifUser = false;
+        boolean verifSenha = false;
         login = JOptionPane.showInputDialog("Digite o login: \n");
         senha = JOptionPane.showInputDialog("Digite a senha: \n");
         for (String value : ler) {

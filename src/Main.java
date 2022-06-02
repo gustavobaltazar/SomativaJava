@@ -26,8 +26,9 @@ public class Main {
             switch (user_choice) {
                 case 1:
                     manipulaProduto.adicionarProduto();
-//                case 2:
-//                    manipulaProduto.
+                    break;
+                case 2:
+                    manipulaProduto.alterarProduto();
             }
         }
     }

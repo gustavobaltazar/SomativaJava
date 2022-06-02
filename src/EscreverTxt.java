@@ -1,6 +1,4 @@
-import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
@@ -49,6 +47,36 @@ public class EscreverTxt {
                 Files.write(caminho, usuarios, StandardCharsets.UTF_8);
             }
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void gravarProduto(String n,String nome, String quantidade) {
+        ArrayList<String> produtos = new ArrayList<>();
+        Path caminho = Paths.get(n + ".txt");
+        produtos.add(nome);
+        produtos.add(quantidade);
+
+        try {
+            if (Files.exists(caminho)){
+                Files.write(caminho, produtos, StandardCharsets.UTF_8, StandardOpenOption.APPEND);
+            } else {
+                Files.write(caminho, produtos, StandardCharsets.UTF_8);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void lerProduto(String nome){
+        Path path = Paths.get(nome + ".txt");
+        try {
+            List<String> contents = Files.readAllLines(path);
+            for(String content : contents){
+                System.out.println(content);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
