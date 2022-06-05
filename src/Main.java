@@ -29,6 +29,12 @@ public class Main {
                     break;
                 case 2:
                     manipulaProduto.alterarProduto();
+                    break;
+                case 3:
+                    manipulaProduto.removerProduto();
+                    break;
+                case 4:
+                    manipulaProduto.listarProduto();
             }
         }
     }

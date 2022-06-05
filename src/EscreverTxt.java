@@ -1,4 +1,4 @@
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
@@ -6,13 +6,16 @@ import java.util.List;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
+import java.util.Scanner;
 
 public class EscreverTxt {
     private String nome;
     private List<String> lista;
     private String login;
     private String senha;
+    private static Scanner x;
 
+    private static ArrayList<String> prod = new ArrayList<>();
     public static void gravarTxt(String nome, List<String> lista) {
         Path caminho = Paths.get(nome + ".txt");
         try {
@@ -70,15 +73,17 @@ public class EscreverTxt {
         }
     }
 
-    public static void lerProduto(String nome){
+    public static ArrayList<String> lerProduto(String nome){
         Path path = Paths.get(nome + ".txt");
         try {
-            List<String> contents = Files.readAllLines(path);
+            List<String> contents = Files.readAllLines(path, StandardCharsets.UTF_8);
             for(String content : contents){
+                prod.add(content);
                 System.out.println(content);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return prod;
     }
 }

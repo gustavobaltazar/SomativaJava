@@ -1,6 +1,9 @@
 import javax.swing.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 
 public class Produto {
     private String nome;
@@ -11,7 +14,6 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
-    ArrayList<String> produtos = new ArrayList<>();
     ArrayList<ArrayList<String>> produtosListados = new ArrayList<>();
 
     boolean hasNext = true;
@@ -43,7 +45,6 @@ public class Produto {
             int quantidade = Integer.parseInt(JOptionPane.showInputDialog(null,"Digite quantidade"));
             prodsCru.add(nome);
             prodsCru.add(String.valueOf(quantidade));
-
             produtosListados.add(prodsCru);
             EscreverTxt.gravarProduto("produtos", nome, String.valueOf(quantidade));
 
@@ -58,39 +59,107 @@ public class Produto {
         }
     }
 
-    public boolean alterarProduto() {
-        int count = 0;
+    public String alterarProduto() {
         String retorno = "";
-        if (this.produtosListados.size() == 0){
-            System.out.println("======================");
-            System.out.println(" Nao existe produto");
-            System.out.println("======================");
-        }else {
-            for (int i = 0; i < produtosListados.size(); i++) {
-                retorno = retorno.concat(String.format("\n%d Produto: %s ................... %s", i+1, produtosListados.get(i).get(0), produtosListados.get(i).get(1)));
+        ArrayList<String> item = new ArrayList<>();
+        ArrayList<String> qtd = new ArrayList<>();
+        ArrayList<String> ses = EscreverTxt.lerProduto("produtos");
+
+        int count = 0;
+
+        System.out.println(ses);
+        for (String val: ses) {
+            if(count % 2 == 0){
+                item.add(val);
+
+            }else{
+                qtd.add(val);
 
             }
+            count++;
+        }
+        produtosListados.add(ses);
+
+            for (int i = 0; i < item.size(); i++) {
+                retorno = retorno.concat(String.format("\n%d Produto: %s ................... %s", i+1, item.get(i), qtd.get(i)));
+
+            }
+
             JOptionPane.showMessageDialog(null, "Os produtos sao: "+retorno);
             int valorAlterado = Integer.parseInt(JOptionPane.showInputDialog(null, "Qual produto deseja alterar? \n" + produtosListados));
             String valorDesejado = JOptionPane.showInputDialog(null, "Digite o valor desejado: \n" + produtosListados);
             int quantidadeDesejada = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite a quantidade desejada: \n" + produtosListados));
+
             produtosListados.get(valorAlterado).set(0, valorDesejado);
             produtosListados.get(valorAlterado).set(1, String.valueOf(quantidadeDesejada));
-//            produtosListados.set(valorAlterado, valorDesejado);
-//            produtosListados.set(valorAlterado + 1, String.valueOf(quantidadeDesejada));
 
             JOptionPane.showMessageDialog(null, "Os produtos agora sao: "+produtosListados);
-            EscreverTxt.lerProduto("produtos");
+
+        return retorno;
+    }
+
+    public void listarProduto() {
+        ArrayList<String> it = new ArrayList<>();
+        ArrayList<String> qt = new ArrayList<>();
+        ArrayList<String> sas = EscreverTxt.lerProduto("produtos");
+        String ret = "";
+
+        int count = 0;
+
+        System.out.println(sas);
+        for (String val: sas) {
+            if(count % 2 == 0){
+                it.add(val);
+
+            }else{
+                qt.add(val);
+
+            }
+            count++;
+        }
+        for (int i = 0; i < it.size(); i++) {
+            ret = ret.concat(String.format("\n%d Produto: %s ................... %s", i+1, it.get(i), qt.get(i)));
 
         }
-        return true;
+        JOptionPane.showMessageDialog(null, ret);
     }
 
-    public void listarProduto(ArrayList<String> produtos) {
-        System.out.println(produtos);
-    }
+    public void removerProduto() {
+        ArrayList<String> sim = EscreverTxt.lerProduto("produtos");
+        produtosListados.add(sim);
+        String retorno = "";
+        ArrayList<String> item = new ArrayList<>();
+        ArrayList<String> qtd = new ArrayList<>();
 
-    private ArrayList<String> removerProduto(String nome, int quantidade) {
-        return null;
+
+        int count = 0;
+
+        System.out.println(sim);
+        for (String val: sim) {
+            if(count % 2 == 0){
+                item.add(val);
+
+            }else{
+                qtd.add(val);
+
+            }
+            count++;
+        }
+
+        for (int i = 0; i < item.size(); i++) {
+            retorno = retorno.concat(String.format("\n%d Produto: %s ................... %s", i+1, item.get(i), qtd.get(i)));
+
+        }
+
+        JOptionPane.showMessageDialog(null, "Os produtos sao: "+retorno);
+        int valorAlterado = Integer.parseInt(JOptionPane.showInputDialog(null, "Qual produto deseja excluir? \n" + produtosListados));
+//        String valorDesejado = JOptionPane.showInputDialog(null, "Digite o valor desejado: \n" + produtosListados);
+        System.out.println(produtosListados);
+        produtosListados.get(valorAlterado).remove(valorAlterado + 1);
+        produtosListados.get(valorAlterado).remove(valorAlterado);
+
+
+
+        JOptionPane.showMessageDialog(null, "Os produtos agora sao: "+produtosListados);
     }
 }
