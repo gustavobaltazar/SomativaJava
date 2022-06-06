@@ -34,7 +34,9 @@ public class Main {
                     manipulaProduto.removerProduto();
                     break;
                 case 4:
+                    manipulaProduto.preencheArray();
                     manipulaProduto.listarProduto();
+                    break;
             }
         }
     }

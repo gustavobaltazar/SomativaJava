@@ -1,0 +1,10 @@
+dino
+10
+Icaro
+20
+natha
+30
+Camille
+40
+gustavo
+20

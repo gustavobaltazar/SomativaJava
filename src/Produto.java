@@ -1,13 +1,11 @@
 import javax.swing.*;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 
 public class Produto {
     private String nome;
     private int quantidade;
+    private ArrayList<String> sas = new ArrayList<>();
 
     Produto(String nome, int quantidade) {
         this.nome = nome;
@@ -97,17 +95,22 @@ public class Produto {
 
         return retorno;
     }
-
+    public void preencheArray(){
+      this.sas = sas =  EscreverTxt.lerProduto("produtos");
+    }
     public void listarProduto() {
         ArrayList<String> it = new ArrayList<>();
         ArrayList<String> qt = new ArrayList<>();
-        ArrayList<String> sas = EscreverTxt.lerProduto("produtos");
+
+        LinkedHashSet<String> hashSet = new LinkedHashSet<>(this.sas);
+        ArrayList<String> exibirSemDuplicatas = new ArrayList<>(hashSet);
+
         String ret = "";
 
         int count = 0;
 
         System.out.println(sas);
-        for (String val: sas) {
+        for (String val: exibirSemDuplicatas) {
             if(count % 2 == 0){
                 it.add(val);
 
@@ -117,9 +120,9 @@ public class Produto {
             }
             count++;
         }
+        ret = "";
         for (int i = 0; i < it.size(); i++) {
             ret = ret.concat(String.format("\n%d Produto: %s ................... %s", i+1, it.get(i), qt.get(i)));
-
         }
         JOptionPane.showMessageDialog(null, ret);
     }
