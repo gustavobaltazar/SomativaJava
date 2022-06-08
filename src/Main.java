@@ -24,19 +24,13 @@ public class Main {
                     "4- Listar Produto\n"));
 
             switch (user_choice) {
-                case 1:
-                    manipulaProduto.adicionarProduto();
-                    break;
-                case 2:
-                    manipulaProduto.alterarProduto();
-                    break;
-                case 3:
-                    manipulaProduto.removerProduto();
-                    break;
-                case 4:
+                case 1 -> manipulaProduto.adicionarProduto();
+                case 2 -> manipulaProduto.alterarProduto();
+                case 3 -> manipulaProduto.removerProduto();
+                case 4 -> {
                     manipulaProduto.preencheArray();
                     manipulaProduto.listarProduto();
-                    break;
+                }
             }
         }
     }

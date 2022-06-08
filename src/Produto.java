@@ -102,15 +102,12 @@ public class Produto {
         ArrayList<String> it = new ArrayList<>();
         ArrayList<String> qt = new ArrayList<>();
 
-        LinkedHashSet<String> hashSet = new LinkedHashSet<>(this.sas);
-        ArrayList<String> exibirSemDuplicatas = new ArrayList<>(hashSet);
-
         String ret = "";
 
         int count = 0;
 
         System.out.println(sas);
-        for (String val: exibirSemDuplicatas) {
+        for (String val: sas) {
             if(count % 2 == 0){
                 it.add(val);
 
@@ -124,6 +121,7 @@ public class Produto {
         for (int i = 0; i < it.size(); i++) {
             ret = ret.concat(String.format("\n%d Produto: %s ................... %s", i+1, it.get(i), qt.get(i)));
         }
+        sas.clear();
         JOptionPane.showMessageDialog(null, ret);
     }
 
@@ -153,16 +151,15 @@ public class Produto {
             retorno = retorno.concat(String.format("\n%d Produto: %s ................... %s", i+1, item.get(i), qtd.get(i)));
 
         }
-
         JOptionPane.showMessageDialog(null, "Os produtos sao: "+retorno);
         int valorAlterado = Integer.parseInt(JOptionPane.showInputDialog(null, "Qual produto deseja excluir? \n" + produtosListados));
 //        String valorDesejado = JOptionPane.showInputDialog(null, "Digite o valor desejado: \n" + produtosListados);
         System.out.println(produtosListados);
         produtosListados.get(valorAlterado).remove(valorAlterado + 1);
         produtosListados.get(valorAlterado).remove(valorAlterado);
-
-
-
-        JOptionPane.showMessageDialog(null, "Os produtos agora sao: "+produtosListados);
+        JOptionPane.showMessageDialog(null, "Valor removido");
+        produtosListados.remove(0);
+        System.out.println(produtosListados);
     }
+
 }
