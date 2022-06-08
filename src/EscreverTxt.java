@@ -16,7 +16,8 @@ public class EscreverTxt {
     private static Scanner x;
 
     private static ArrayList<String> prod = new ArrayList<>();
-    public static void gravarTxt(String nome, List<String> lista) {
+
+    public static void gravarLogTxt(String nome, List<String> lista) {
         Path caminho = Paths.get(nome + ".txt");
         try {
             if (Files.exists(Paths.get("Log.txt")) && caminho.equals("Log.txt")) {
@@ -31,20 +32,20 @@ public class EscreverTxt {
 
     public static ArrayList<String> lerTxt(String nomeArquivo) throws IOException {
         Path caminho = Paths.get(nomeArquivo + ".txt");
-        ArrayList<String> dados = new ArrayList<String>((Files.readAllLines(caminho)));
+        ArrayList<String> dados = new ArrayList<>((Files.readAllLines(caminho)));
         System.out.println(dados);
 
         return dados;
     }
 
-    public static void gravarUsuario( String nome, String login, String senha) {
+    public static void gravarUsuario(String nome, String login, String senha) {
         ArrayList<String> usuarios = new ArrayList<>();
         Path caminho = Paths.get(nome + ".txt");
         usuarios.add(login);
         usuarios.add(senha);
 
         try {
-            if (Files.exists(caminho)){
+            if (Files.exists(caminho)) {
                 Files.write(caminho, usuarios, StandardCharsets.UTF_8, StandardOpenOption.APPEND);
             } else {
                 Files.write(caminho, usuarios, StandardCharsets.UTF_8);
@@ -55,14 +56,14 @@ public class EscreverTxt {
         }
     }
 
-    public static void gravarProduto(String n,String nome, String quantidade) {
+    public static void gravarProduto(String n, String nome, String quantidade) {
         ArrayList<String> produtos = new ArrayList<>();
         Path caminho = Paths.get(n + ".txt");
         produtos.add(nome);
         produtos.add(quantidade);
 
         try {
-            if (Files.exists(caminho)){
+            if (Files.exists(caminho)) {
                 Files.write(caminho, produtos, StandardCharsets.UTF_8, StandardOpenOption.APPEND);
             } else {
                 Files.write(caminho, produtos, StandardCharsets.UTF_8);
@@ -73,11 +74,44 @@ public class EscreverTxt {
         }
     }
 
-    public static ArrayList<String> lerProduto(String nome){
+    public static void gravarTxtAux(String n,String newName, ArrayList<String> products) {
+        ArrayList<String> auxiliar = new ArrayList<>();
+        Path camin = Paths.get(n + ".txt");
+        Path paths = Paths.get(newName + ".txt");
+
+
+        String result = String.join(" \n", products);
+        auxiliar.add(result);
+
+        try {
+            if (Files.exists(camin)) {
+                Files.write(camin, auxiliar, StandardCharsets.UTF_8, StandardOpenOption.WRITE);
+            } else {
+                Files.write(camin, auxiliar, StandardCharsets.UTF_8);
+            }
+            if (Files.exists(paths)) {
+                Files.write(paths, auxiliar, StandardCharsets.UTF_8, StandardOpenOption.WRITE);
+            } else {
+                Files.write(paths, auxiliar, StandardCharsets.UTF_8);
+            }
+
+            List<String> conteudo = Files.readAllLines(camin, StandardCharsets.UTF_8);
+            System.out.println("CONTENTS" + conteudo);
+            for (String content : conteudo) {
+                products.add(content);
+                System.out.println(content);
+
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static ArrayList<String> lerProduto(String nome) {
         Path path = Paths.get(nome + ".txt");
         try {
             List<String> contents = Files.readAllLines(path, StandardCharsets.UTF_8);
-            for(String content : contents){
+            for (String content : contents) {
                 prod.add(content);
                 System.out.println(content);
             }
