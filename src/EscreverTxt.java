@@ -73,23 +73,6 @@ public class EscreverTxt {
             e.printStackTrace();
         }
     }
-    public static void deletarProduto(String n, ArrayList<String> produtos) {
-        ArrayList<String> prods = new ArrayList<>();
-        Path caminho = Paths.get(n + ".txt");
-        String result = String.join(" \n", produtos);
-        prods.add(result);
-
-        try {
-            if (Files.exists(caminho)) {
-                Files.write(caminho, prods, StandardCharsets.UTF_8, StandardOpenOption.WRITE);
-            } else {
-                Files.write(caminho, prods, StandardCharsets.UTF_8);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public static void gravarTxtAux(String n,String newName, ArrayList<String> products) {
         ArrayList<String> auxiliar = new ArrayList<>();

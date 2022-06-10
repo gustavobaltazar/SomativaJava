@@ -45,9 +45,13 @@ public class Main {
                     manipulaProduto.listarProduto();
                     log.add("Produtos listados as: " + LocalDateTime.now() + "\n");
                 }
+                case 5 -> {
+                    System.exit(0);
+                }
 
             }
             log.add("Iniciou o programa as: " + LocalDateTime.now() + "\n");
+            EscreverTxt.gravarLogTxt("Log", log);
         }
     }
 }
