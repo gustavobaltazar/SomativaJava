@@ -73,35 +73,47 @@ public class EscreverTxt {
             e.printStackTrace();
         }
     }
+    public static void deletarProduto(String n, ArrayList<String> produtos) {
+        ArrayList<String> prods = new ArrayList<>();
+        Path caminho = Paths.get(n + ".txt");
+        String result = String.join(" \n", produtos);
+        prods.add(result);
+
+        try {
+            if (Files.exists(caminho)) {
+                Files.write(caminho, prods, StandardCharsets.UTF_8, StandardOpenOption.WRITE);
+            } else {
+                Files.write(caminho, prods, StandardCharsets.UTF_8);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void gravarTxtAux(String n,String newName, ArrayList<String> products) {
         ArrayList<String> auxiliar = new ArrayList<>();
         Path camin = Paths.get(n + ".txt");
         Path paths = Paths.get(newName + ".txt");
 
-
         String result = String.join(" \n", products);
         auxiliar.add(result);
 
         try {
-            if (Files.exists(camin)) {
-                Files.write(camin, auxiliar, StandardCharsets.UTF_8, StandardOpenOption.WRITE);
-            } else {
-                Files.write(camin, auxiliar, StandardCharsets.UTF_8);
-            }
+                System.out.println("Produtos: " + products);
+
             if (Files.exists(paths)) {
-                Files.write(paths, auxiliar, StandardCharsets.UTF_8, StandardOpenOption.WRITE);
+                System.out.println("PATHS:" +paths);
+                System.out.println("PRODutos" +products);
+                Files.write(paths, products, StandardCharsets.UTF_8, StandardOpenOption.WRITE);
             } else {
-                Files.write(paths, auxiliar, StandardCharsets.UTF_8);
+                Files.write(paths, products, StandardCharsets.UTF_8, StandardOpenOption.WRITE);
+            }if (Files.exists(camin)) {
+                Files.write(paths, products, StandardCharsets.UTF_8, StandardOpenOption.WRITE);
+            } else {
+                Files.write(paths, products, StandardCharsets.UTF_8, StandardOpenOption.WRITE);
             }
 
-            List<String> conteudo = Files.readAllLines(camin, StandardCharsets.UTF_8);
-            System.out.println("CONTENTS" + conteudo);
-            for (String content : conteudo) {
-                products.add(content);
-                System.out.println(content);
-
-            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -34,17 +34,14 @@ public class Main {
                     log.add("Adicionado um produto as: " + LocalDateTime.now() + "\n");
                 }
                 case 2 -> {
-                    manipulaProduto.preencheArray();
                     manipulaProduto.alterarProduto();
                     log.add("Produto alterado as: " + LocalDateTime.now() + "\n");
                 }
                 case 3 -> {
-                    manipulaProduto.preencheArray();
                     manipulaProduto.removerProduto();
                     log.add("Produto removido as: " + LocalDateTime.now() + "\n");
                 }
                 case 4 -> {
-                    manipulaProduto.preencheArray();
                     manipulaProduto.listarProduto();
                     log.add("Produtos listados as: " + LocalDateTime.now() + "\n");
                 }

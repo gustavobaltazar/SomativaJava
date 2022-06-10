@@ -1,5 +1,10 @@
 import javax.swing.*;
+import java.io.IOException;
 import java.lang.reflect.Array;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Produto {
@@ -103,6 +108,7 @@ public class Produto {
       this.sas =  EscreverTxt.lerProduto("produtos");
     }
     public void listarProduto() {
+        preencheArray();
         ArrayList<String> it = new ArrayList<>();
         ArrayList<String> qt = new ArrayList<>();
 
@@ -110,7 +116,6 @@ public class Produto {
 
         int count = 0;
 
-        System.out.println(this.sas);
         for (String value: this.sas) {
             if(count % 2 == 0){
                 it.add(value);
@@ -126,15 +131,17 @@ public class Produto {
             ret = ret.concat(String.format("\n%d Produto: %s ................... %s", i+1, it.get(i), qt.get(i)));
         }
         this.sas.clear();
+        preencheArray();
         JOptionPane.showMessageDialog(null, ret);
     }
 
     public void removerProduto() {
+        this.sas.clear();
+        preencheArray();
         produtosListados.add(this.sas);
         String retorno = "";
         ArrayList<String> item = new ArrayList<>();
         ArrayList<String> qtd = new ArrayList<>();
-
 
         int count = 0;
 
@@ -158,12 +165,13 @@ public class Produto {
         JOptionPane.showMessageDialog(null, "Os produtos sao: "+retorno);
         int valorAlterado = Integer.parseInt(JOptionPane.showInputDialog(null,
                 "Qual produto deseja excluir? \n" + this.sas));
-        this.sas.remove(valorAlterado + 1);
+        int soma = valorAlterado + 1;
+        this.sas.remove(soma);
         this.sas.remove(valorAlterado);
-        System.out.println("SAAAAAAAAS" + this.sas);
+        System.out.println("array deletado:" + this.sas);
         EscreverTxt.gravarTxtAux("auxiliar", "produtos", this.sas);
-        JOptionPane.showMessageDialog(null, "Valor removido");
-        System.out.println(this.sas);
         this.sas.clear();
+        JOptionPane.showMessageDialog(null, "Valor removido");
+
     }
 }
